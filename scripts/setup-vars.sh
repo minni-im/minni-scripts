@@ -13,7 +13,7 @@ if [ ! -e ~/.setup/vars ]; then
     read hostname
 
     if [ -z "$name" ]; then
-        hostname="Minni"
+        name="Minni"
     fi
 
     if [ -z "$hostname" ]; then
