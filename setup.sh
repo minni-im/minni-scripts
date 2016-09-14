@@ -10,11 +10,11 @@ source ./scripts/setup-vars.sh
 source ./scripts/setup-config.sh
 source ./scripts/setup-apt.sh
 
-source ./scripts/setup-couchdb.sh &> setup.log
-source ./scripts/setup-redis.sh &> setup.log
+source ./scripts/setup-couchdb.sh
+source ./scripts/setup-redis.sh
 
-source ./scripts/setup-deps.sh &> setup.log
+source ./scripts/setup-deps.sh
 
 source ./scripts/setup-app.sh
 
-source ./scripts/setup-nginx.sh &> setup.log
+source ./scripts/setup-nginx.sh

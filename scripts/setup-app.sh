@@ -44,22 +44,19 @@ embed:
     - Vine
 EOF
 
-cat > /tmp/minni.conf <<EOF
-#!upstart
+cat > /tmp/minni.service <<EOF
+[Unit]
+Description=minni.im daemon
 
-description "minni.im"
-author "Benoit Charbonnier"
+[Service]
+ExecStart=sudo -u $USER NODE_ENV=production /usr/bin/nodejs /home/$USER/minni-app/index.js
+Restart=on-failure
 
-start on runlevel [2345]
-stop on runlevel [016]
-
-respawn             # restart when job dies
-respawn limit 5 60  # give up after 5 respawns in 60 seconds
-
-script
-  exec sudo -u $USER NODE_ENV=production /usr/bin/node /home/$USER/minni-app/index.js
-end script
+[Install]
+WantedBy=multi-user.agent
 EOF
+
+#  exec sudo -u $USER NODE_ENV=production /usr/bin/node /home/$USER/minni-app/index.js
 
 if [ ! -e ~/minni-app ]; then
     # We first need to clone
@@ -71,17 +68,16 @@ if [ ! -e ~/minni-app ]; then
     mv /tmp/settings.yml .
 
     sudo mv /tmp/minni.conf /etc/init/minni.conf
-    sudo start minni
+    sudo systemctl start minni.service
     popd
 else
     pushd ~/minni-app
-    sudo stop minni
     git fetch
     git checkout -f stable 2> dev/null
     git reset --hard origin/stable
     npm install
     npm run dist
-    sudo start minni
+    sudo systemctl restart minni.service
     popd
 fi
 
