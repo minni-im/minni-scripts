@@ -6,7 +6,7 @@ upstream node_upstream {
     server 127.0.0.1:3000;
 }
 
-map $http_upgrade $connection_upgrade {
+map \$http_upgrade \$connection_upgrade {
     default "Upgrade";
     ''      "Close";
 }
