@@ -67,7 +67,7 @@ if [ ! -e ~/minni-app ]; then
     npm run dist
     mv /tmp/settings.yml .
 
-    sudo mv /tmp/minni.conf /etc/init/minni.conf
+    sudo mv /tmp/minni.service /lib/systemd/system/minni.service
     sudo systemctl start minni.service
     popd
 else
