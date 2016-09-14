@@ -35,11 +35,11 @@ embed:
     - CodePen
     - Instagram
     - Vimeo
-    - Medium
+    # - Medium
     - Github
     - Gist
     - Flickr
-    - Twitter
+    # - Twitter
     - Youtube
     - Spotify
     - Vine
