@@ -70,14 +70,14 @@ if [ ! -e ~/minni-app ]; then
     npm run dist
     mv /tmp/settings.yml .
 
-    sudo mv /tmp/minni.conf /etc/init.d/minni.conf
+    sudo mv /tmp/minni.conf /etc/init/minni.conf
     sudo start minni
     popd
 else
     pushd ~/minni-app
     sudo stop minni
     git fetch
-    git checkout -f stable
+    git checkout -f stable 2> dev/null
     git reset --hard origin/stable
     npm install
     npm run dist

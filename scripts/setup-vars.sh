@@ -24,6 +24,7 @@ if [ ! -e ~/.setup/vars ]; then
         scheme="http"
     fi
 
-    echo "Installing Minni app as '$name' with user=$USER host=$hostname scheme=$scheme listening on $binding"
+    touch ~/.setup/vars
+    echo "Installing Minni app as $name with user=$USER host=$hostname scheme=$scheme"
     sleep 2
 fi

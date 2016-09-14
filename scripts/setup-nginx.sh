@@ -17,8 +17,8 @@ server {
     large_client_header_buffers 4 32k;
     client_max_body_size 50M;
     charset utf-8;
-    access_log /home/$USER/logs/nginx.access.log;
-    error_log /home/$USER/logs/nginx.error.log;
+    access_log /home/$USER/minni-app/logs/nginx.access.log;
+    error_log /home/$USER/minni-app/logs/nginx.error.log;
 
     location /emojis {
         internal;
@@ -28,7 +28,7 @@ server {
     location ~ ^/images/emoji/ {
         access_log off;
         expires 30d;
-        rewrite ^/images/emoji/(apple|twitter|emojione)/(.*).(svg|png)$ /emojis/$1/$3/$2.$3 last;
+        rewrite ^/images/emoji/(apple|twitter|emojione)/(.*).(svg|png)$ /emojis/\$1/\$3/\$2.\$3 last;
     }
 
     location ~ ^/(images/|js/|css/|sounds/|robots.txt|humans.txt|favicon.ico|.well-known/) {
