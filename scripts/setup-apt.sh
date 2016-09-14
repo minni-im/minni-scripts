@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function apt-install {
     for pkg in $@; do
         echo -e "[APT-GET] Installing package $pkg..."
@@ -17,6 +19,7 @@ function package-not-installed {
     test -z "$(sudo dpkg -s $1 2> /dev/null | grep Status)"
 }
 
+echo "[SystemUpdate] Performing system updates"
 sudo apt-get -y update &> apt.log
 sudo apt-get -y upgrade &> apt.log
 sudo apt-get -y dist-upgrade &> apt.log

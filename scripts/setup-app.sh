@@ -1,7 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
 pushd ~
-
 
 cat > /tmp/settings.yml <<EOF
 debug: false
@@ -19,12 +18,14 @@ couchdb:
   port: 5984
 
 auth:
-  providers: [ local, github ]
-  github:
-    id: $GITHUB_ID
-    secret: $GITHUB_SECRET
-    scope: user
-    callback: /auth/github/callback
+  providers: [ local ]
+  # to activate Github provider
+  # providers: [ local, github ]
+  # github:
+  #  id: your id here
+  #  secret: your secret here
+  #  scope: user
+  #  callback: /auth/github/callback
 
 embed:
   active: true
@@ -49,8 +50,10 @@ cat > /tmp/minni.service <<EOF
 Description=minni.im daemon
 
 [Service]
-ExecStart=sudo -u $USER NODE_ENV=production /usr/bin/nodejs /home/$USER/minni-app/index.js
+ExecStart=/usr/bin/nodejs /home/$USER/minni-app/index.js
 Restart=on-failure
+User=$USER
+Environment=NODE_ENV=production
 
 [Install]
 WantedBy=multi-user.agent
@@ -69,6 +72,7 @@ if [ ! -e ~/minni-app ]; then
 
     sudo mv /tmp/minni.service /lib/systemd/system/minni.service
     sudo systemctl start minni.service
+    sudo systemctl enable minni.service
     popd
 else
     pushd ~/minni-app

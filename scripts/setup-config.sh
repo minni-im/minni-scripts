@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# set up vim
-cat > ~/.vimrc <<EOF
+if [ ! -e ~/.setup/config ]; then
+  # set up vim
+  cat > ~/.vimrc <<EOF
 set nocompatible
 set bs=2
 set ts=4
@@ -24,6 +25,9 @@ set fileencoding=utf8
 set encoding=utf8
 EOF
 
-cat > ~/.bash_profile <<EOF
+  cat > ~/.bash_profile <<EOF
 [[ -s "\$HOME/.profile" ]] && source "\$HOME/.profile" # Load the default .profile
 EOF
+
+  touch ~/.setup/config
+fi

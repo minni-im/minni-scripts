@@ -59,4 +59,4 @@ sudo mv /tmp/minni.conf /etc/nginx/sites-available/minni
 sudo rm -rf /etc/nginx/sites-enabled/minni
 sudo rm -rf /etc/nginx/sites-enabled/default
 sudo ln -s /etc/nginx/sites-available/minni /etc/nginx/sites-enabled/minni
-sudo service nginx restart
+sudo systemctl restart nginx.service

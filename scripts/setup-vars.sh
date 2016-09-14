@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -e ~/.setup/vars ]; then
     mkdir -p ~/.setup
@@ -25,6 +25,6 @@ if [ ! -e ~/.setup/vars ]; then
     fi
 
     touch ~/.setup/vars
-    echo "Installing Minni app as $name with user=$USER host=$hostname scheme=$scheme"
+    echo "Installing Minni app as '$name' with user=$USER host=$hostname scheme=$scheme"
     sleep 2
 fi
