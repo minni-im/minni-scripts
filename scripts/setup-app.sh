@@ -65,13 +65,13 @@ if [ ! -e ~/minni-app ]; then
     # We first need to clone
     git clone https://github.com/minni-im/minni-app.git minni-app
     pushd ~/minni-app
-    git checkout -f stable
+    git checkout -f stable 2> dev/null
     npm install
     npm run dist
     mv /tmp/settings.yml .
 
-    sudo mv /tmp/minni.service /lib/systemd/system/minni.service
-    sudo systemctl start minni.service
+    sudo mv /tmp/minni.service /etc/systemd/system/minni.service
+    sudo systemctl daemon-reload
     sudo systemctl enable minni.service
     popd
 else
