@@ -4,18 +4,8 @@ pushd ~
 
 cat > /tmp/settings.yml <<EOF
 debug: false
-port: 3000
 host: 127.0.0.1
 name: $name
-
-session:
-  key: minni-session-id
-  secret: MinniIsTrullyAnAwesomeCollaborativeChatToolWithALotOfFeatures
-
-couchdb:
-  name: minni
-  host: 127.0.0.1
-  port: 5984
 
 auth:
   providers: [ local ]
@@ -24,8 +14,6 @@ auth:
   # github:
   #  id: your id here
   #  secret: your secret here
-  #  scope: user
-  #  callback: /auth/github/callback
 
 embed:
   active: true
@@ -62,7 +50,6 @@ EOF
 #  exec sudo -u $USER NODE_ENV=production /usr/bin/node /home/$USER/minni-app/index.js
 
 if [ ! -e ~/minni-app ]; then
-    # We first need to clone
     git clone https://github.com/minni-im/minni-app.git minni-app
     pushd ~/minni-app
     git checkout -f stable 2> dev/null
@@ -70,9 +57,13 @@ if [ ! -e ~/minni-app ]; then
     npm run dist
     mv /tmp/settings.yml .
 
+    # we create the systemd config file
     sudo mv /tmp/minni.service /etc/systemd/system/minni.service
     sudo systemctl daemon-reload
+    # activating to start on boot
     sudo systemctl enable minni.service
+    # starting right now
+    sudo systemctl start minni.service
     popd
 else
     pushd ~/minni-app
