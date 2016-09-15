@@ -55,7 +55,7 @@ if [ ! -e ~/minni-app ]; then
     git checkout -f stable 2> /dev/null
     npm install
     npm run dist
-    mv /tmp/settings.yml .
+    mv /tmp/settings.yml ./settings.yml
 
     # we create the systemd config file
     sudo mv /tmp/minni.service /etc/systemd/system/minni.service
