@@ -52,7 +52,7 @@ EOF
 if [ ! -e ~/minni-app ]; then
     git clone https://github.com/minni-im/minni-app.git minni-app
     pushd ~/minni-app
-    git checkout -f stable 2> dev/null
+    git checkout -f stable 2> /dev/null
     npm install
     npm run dist
     mv /tmp/settings.yml .
@@ -68,7 +68,7 @@ if [ ! -e ~/minni-app ]; then
 else
     pushd ~/minni-app
     git fetch
-    git checkout -f stable 2> dev/null
+    git checkout -f stable 2> /dev/null
     git reset --hard origin/stable
     npm install
     npm run dist
